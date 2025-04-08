@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { divide, expo, multiply, sub, sum } from '../../src/main.js';
+import { divide, expo, fizzBuzz, multiply, sub, sum } from '../../src/main.js';
 
 describe('SUM function', () => {
   // Assert if setTimeout was called properly
@@ -84,4 +84,52 @@ describe('EXPO function', () => {
     const res = expo(3, 0);
     expect(res).toBe(1);
   });
+});
+
+describe('FIZZBUZZ function', () => {
+  it('should return an array of numbers from 1 to n', async () => {
+    const res = fizzBuzz(10);
+    expect(res).toEqual([
+      1,
+      2,
+      'Fizz',
+      4,
+      'Buzz',
+      'Fizz',
+      7,
+      8,
+      'Fizz',
+      'Buzz',
+    ]);
+  });
+  it('should return its number if its not a multiple of 3 or 5', () => {
+    const res = fizzBuzz(2);
+    expect(res).toEqual([1, 2]);
+  });
+
+  it('should return fizz if its a multiple of 3', () => {
+    const res = fizzBuzz(6);
+    const mult = res[2];
+    expect(mult).toEqual('Fizz');
+  });
+
+  it('should return buzz if its a multiple of 5', () => {
+    const res = fizzBuzz(6);
+    const mult = res[4];
+    expect(mult).toEqual('Buzz');
+  });
+
+  it('should return fizzbuzz if its a multiple of 3 and of 5', () => {
+    const res = fizzBuzz(15);
+    const mult = res[res.length - 1];
+    expect(mult).toEqual('FizzBuzz');
+  });
+
+  // it('should check the return value for 2000000001', () => {
+  //   const res = fizzBuzz(2000000001);
+  //   const mult = res[res.length - 1];
+  //   console.log(mult);
+
+  //   expect(mult).toEqual('FizzBuzz');
+  // });
 });
