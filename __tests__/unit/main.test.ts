@@ -1,40 +1,87 @@
-import { describe, it, afterEach, beforeEach, vi, expect } from 'vitest';
-import { Delays, greeter } from '../../src/main.js';
+import { describe, it, expect } from 'vitest';
+import { divide, expo, multiply, sub, sum } from '../../src/main.js';
 
-describe('greeter function', () => {
-  const name = 'John';
-
-  beforeEach(() => {
-    // Read more about fake timers
-    // https://vitest.dev/api/vi.html#vi-usefaketimers
-    vi.useFakeTimers();
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-    vi.restoreAllMocks();
-  });
-
+describe('SUM function', () => {
   // Assert if setTimeout was called properly
-  it('delays the greeting by 2 seconds', async () => {
-    vi.spyOn(global, 'setTimeout');
-    const p = greeter(name);
-
-    await vi.runAllTimersAsync();
-    await p;
-
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout).toHaveBeenLastCalledWith(
-      expect.any(Function),
-      Delays.Long,
-    );
+  it('should add two numbers', async () => {
+    const res = sum(1, 2);
+    expect(res).toBe(3);
   });
 
-  // Assert greeter result
-  it('greets a user with `Hello, {name}` message', async () => {
-    const p = greeter(name);
-    await vi.runAllTimersAsync();
+  it('should return 0', async () => {
+    const res = sum(0, 0);
+    expect(res).toBe(0);
+  });
 
-    expect(await p).toBe(`Hello, ${name}`);
+  it('should return -2', async () => {
+    const res = sum(1, -3);
+    expect(res).toBe(-2);
+  });
+});
+
+describe('SUB function', () => {
+  // Assert if setTimeout was called properly
+  it('should subtract two numbers', async () => {
+    const res = sub(1, 2);
+    expect(res).toBe(-1);
+  });
+
+  it('should return 0', async () => {
+    const res = sub(0, 0);
+    expect(res).toBe(0);
+  });
+
+  it('should return 4', async () => {
+    const res = sub(1, -3);
+    expect(res).toBe(4);
+  });
+});
+
+describe('MULT function', () => {
+  // Assert if setTimeout was called properly
+  it('should multiply two numbers', async () => {
+    const res = multiply(3, 2);
+    expect(res).toBe(6);
+  });
+
+  it('should return 0', async () => {
+    const res = multiply(0, 0);
+    expect(res).toBe(0);
+  });
+
+  it('should return -6 when multiplying a positive and negative number', async () => {
+    const res = multiply(2, -3);
+    expect(res).toBe(-6);
+  });
+});
+
+describe('DIVIDE function', () => {
+  // Assert if setTimeout was called properly
+  it('should multiply two numbers', async () => {
+    const res = divide(40, 2);
+    expect(res).toBe(20);
+  });
+
+  it('should return 0', async () => {
+    const res = divide(0, 1);
+    expect(res).toBe(0);
+  });
+
+  it('should return -6 when multiplying a positive and negative number', async () => {
+    const res = divide(20, -2);
+    expect(res).toBe(-10);
+  });
+});
+
+describe('EXPO function', () => {
+  // Assert if setTimeout was called properly
+  it('should expo the first number by the second', async () => {
+    const res = expo(2, 3);
+    expect(res).toBe(8);
+  });
+
+  it('should return 0, expo 0 = 1', async () => {
+    const res = expo(3, 0);
+    expect(res).toBe(1);
   });
 });
